@@ -1,0 +1,90 @@
+/// Below code written by me fails for large integer value
+
+public class PlusOne {
+
+	
+	
+	public static int[] plusOne(int[] digits) {
+        int j =0;
+        double num = 0;
+        for(int i = digits.length-1;i>=0;i--){
+            
+            num = (num + digits[i]*(Math.pow(10,j)));
+            j++;
+            
+        }
+        double res = num+1; 
+        double res1 = num+1;//1000
+        int count = 0;
+        while(res1 != 0)
+        {
+           
+            res1= res1/10;
+            ++count;
+        }
+        
+        
+        
+        
+        
+        if (count>digits.length){
+        	int[] output = new int[digits.length + 1];
+            int a = digits.length;
+            while(res>0){
+            	
+            	double otp = res%10;
+            	output[a] = (int) otp;
+            	a--;
+            	res = res/10;
+            }
+            return output;
+        }else{
+        	int[] output = new int[digits.length];
+            int a = digits.length-1;
+            while(res>0){
+            	
+            	double otp = res%10;
+            	output[a] = (int) otp;
+            	a--;
+            	res = res/10;
+            }
+            return output; 
+        }
+        
+       
+	} 
+        
+	public static void main(String args[]) 
+	{ 
+	    int arr1[] = {9,8,7,6,5,4,3,2,1,0}; 
+	   
+	    int res[] = plusOne(arr1);
+	   
+	    for (int j = 0; j < res.length; j++) 
+	        System.out.println(res[j]); 
+	} 
+	
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+
+CORRECT SOLUTION BELOW:::
+
+class Solution {
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] != 9) {
+                digits[i]++;
+                break;
+            } else {
+                digits[i] = 0;
+            }
+        }
+        if (digits[0] == 0) {
+            int[] rst = new int[digits.length + 1];
+            rst[0] = 1;
+            return rst;
+        }
+        return digits;
+        
+    }
+}

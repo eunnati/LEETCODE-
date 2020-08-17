@@ -1,0 +1,98 @@
+int n = nums1.length;
+		 int m= nums2.length;  // n has to be > m
+		 
+		 if(m > n){
+			 int[] temp = nums1;
+			 nums1= nums2;
+			 nums2 = temp;
+		 }
+		 /// For distinct elememts use hashset
+		 
+		 ArrayList<Integer> arrli = new ArrayList<Integer>();
+	        for(int i: nums1){
+	            arrli.add(i);        // Save values of first array in set1
+	        }
+	        
+	        ArrayList<Integer> arrli1 = new ArrayList<Integer>();
+	        HashSet<Integer> set = new HashSet<Integer>();
+ 	        if(n==m){
+ 	        	 for(int j: nums2){
+ 		            if(arrli.contains(j)){
+ 		                set.add(j);
+ 		            }
+ 		        }
+ 	        	 int[] result = new int[set.size()];
+ 	    	    int i=0;
+ 	    	    for(int k: set){
+ 	    	        result[i++] = k;
+ 	    	    }
+ 	    	    return result;
+	        }else{
+	        	for(int j: nums2){
+		            if(arrli.contains(j)){
+		               arrli1.add(j);
+		                arrli.remove(j);
+		            }
+		        }
+	        	 int[] result = new int[arrli1.size()];
+	 	    	    int i=0;
+	 	    	    for(int k: arrli1){
+	 	    	        result[i++] = k;
+	 	    	    }
+	 	    	    return result;
+	        }
+			///////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			///Use hashmap for duplicates
+			
+			if (nums1.length > nums2.length) {
+		        return intersect(nums2, nums1);
+		    }
+		    HashMap<Integer, Integer> m = new HashMap<>();
+		    for (int n : nums1) {
+		        m.put(n, m.getOrDefault(n, 0) + 1);
+		    }
+		    int k = 0;
+		    for (int n : nums2) {
+		        int cnt = m.getOrDefault(n, 0);
+		        if (cnt > 0) {
+		            nums1[k++] = n;
+		            m.put(n, cnt - 1);
+		        }
+		    }
+		    return Arrays.copyOfRange(nums1, 0, k);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+(FOR UNIQUE SOLUTIONS I)
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        
+         Set<Integer> check = new HashSet<Integer>();
+        
+         for( int i : nums1){
+              check.add(i);
+         }
+        
+        Set<Integer> inter = new HashSet<Integer>();
+        
+        for(int n : nums2){
+            if(check.contains(n)){
+                inter.add(n);
+            }
+        }
+        
+        int[] output = new int[inter.size()];
+        
+        int k =0;
+        
+        for(int j : inter){
+            output[k++]= j;
+        }
+        
+        return output;
+    }
+}
+		 
+			

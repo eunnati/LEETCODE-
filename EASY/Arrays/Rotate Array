@@ -1,0 +1,17 @@
+class Solution {
+    public void rotate(int[] nums, int k) {
+        //1234
+        
+        while(k>0){ //Will run for k rotations
+            int last = nums[nums.length-1]; // Store last index value to be put in first
+            for(int i=nums.length-1;i>0;i--){  // start replacing from last till 1 index
+                nums[i]= nums[i-1];
+                
+            }
+            nums[0] = last;  //Allot first index value as saved last value
+            k--;
+        }
+        
+        
+    }
+}

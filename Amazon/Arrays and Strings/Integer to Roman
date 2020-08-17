@@ -1,0 +1,18 @@
+class Solution {
+    public String intToRoman(int num) {
+       String[] units = {"", "I", "II", "III", "IV","V", "VI", "VII", "VIII","IX"};
+       String[] tens = {"", "X", "XX", "XXX", "XL","L", "LX", "LXX", "LXXX","XC"};
+       String[] hundreds = {"", "C", "CC", "CCC", "CD","D", "DC", "DCC", "DCCC","CM"};
+       String[] thousands = {"", "M", "MM", "MMM"};
+        
+        String unitplace = units[num%10];
+        String tensplace = tens[(num%100)/10];
+        String hundredsplace = hundreds[(num%1000)/100];
+        String thousandsplace = thousands[(num/1000)];
+        
+        String result = thousandsplace+hundredsplace+tensplace+unitplace;
+        
+        return result;
+        
+    }
+}

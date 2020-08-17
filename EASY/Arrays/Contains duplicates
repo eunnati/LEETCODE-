@@ -1,0 +1,44 @@
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        
+       
+        
+        for (int i = 0;i<nums.length;i++){
+            int j = i+1;
+            while(j < nums.length){
+                 if(nums[i] == nums[j]){
+                return true;
+            }else{
+                j++;
+            }
+            }
+           
+        }
+        return false;
+        
+    }
+}
+
+// o(n2) time complexity
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+////USING HASHSET
+
+import java.util.HashSet;
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        
+        Set<Integer> check = new HashSet<>(nums.length);
+        
+        for(int i : nums){
+            if(check.contains(i)){
+                return true;
+            }
+            else{
+                check.add(i);
+            }
+        }
+        return false;
+    }
+}

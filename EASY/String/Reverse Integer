@@ -1,0 +1,63 @@
+// WITHOUT OVERFLOW
+
+class Solution {
+    public int reverse(int x) {
+      int fin = 0;
+	        int y=0;
+	        if(x<0){
+	        	 y = x*(-1);
+	        }else{
+	        	y=x;
+	        }
+			
+			
+			//123
+	        while(y > 0){
+	            int temp = y%10; // 3
+	            fin =fin*10+ temp; //321
+	            y= y/10;//12
+	        }
+			
+			
+	        if(x<0){
+	        	 return fin*(-1);
+	        }else{
+	        	 return fin;
+	        }
+	        //return fin;
+    }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+WITH OVERFLOW
+class Solution {
+    public int reverse(int x) {
+    int fin = 0;
+	        int y=0;
+	        int prev=0;
+			
+	        if(x<0){
+	        	 y = x*(-1);
+	        }else{
+	        	y=x;
+	        }
+			
+			
+	        while(y > 0){
+	            int temp = y%10; // 3
+	            fin =fin*10+ temp;
+	            if((fin-temp)/10 != prev){  // to avoid overflow
+	            	return 0;
+	            }
+	            prev= fin;
+	            y= y/10;//12
+	        }
+			
+	        if(x<0){
+	        	 return fin*(-1);
+	        }else{
+	        	 return fin;
+	        }
+	        //return fin;
+    }
+}

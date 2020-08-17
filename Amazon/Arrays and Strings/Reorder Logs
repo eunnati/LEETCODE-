@@ -1,0 +1,36 @@
+class Solution {
+    public String[] reorderLogFiles(String[] logs) {
+        
+        // we have 4 cases
+        // Log1 - letterlog, log2 -digitlog = return -1
+        // Log1 - digitlog, log2 -digitlog = return 0
+        // Log1 - digitlog, log2 -letterlog = return 1
+        // Log1 - letterlog, log2 - letterlog --> lexigraphic 
+        
+        Arrays.sort(logs,(log1,log2)->{
+            String[] split1 = log1.split(" ",2);
+            String[] split2 = log2.split(" ",2);
+            boolean isDigitlog1 = Character.isDigit(split1[1].charAt(0));
+            boolean isDigitlog2 = Character.isDigit(split2[1].charAt(0));
+            
+            if(!isDigitlog2 && !isDigitlog1){
+                int comparelogs = split1[1].compareTo(split2[1]);
+                if(comparelogs == 0){
+                    return split1[0].compareTo(split2[0]);
+                }
+                return comparelogs;
+            }
+            
+            if(isDigitlog1){
+                if(isDigitlog2){
+                    return 0;
+                }
+                return 1;
+            }
+            return -1;
+            
+        });
+        
+        return logs;
+    }
+}

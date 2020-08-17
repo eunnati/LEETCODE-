@@ -1,0 +1,121 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    // My APPROACH FAILS FOR HALF OF THE TEST CASES BECAUSE IT DOESNT HANDLE OVERFLOW_2
+	
+	
+	   public static ListNode reverseList(ListNode head) {       
+	        ListNode current = head;
+	       ListNode next = null;
+	       ListNode prev = null;
+	        
+	        while(current!= null){
+	            next =  current.next;
+	            current.next =  prev;
+	            prev = current;
+	            current = next;
+	        }
+	        return prev;   
+	    }
+	    
+	    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	        
+	       l1 =  reverseList(l1); // 342
+	       l2 = reverseList(l2);    // 456
+	           int sum1 =0;
+	        int sum2 =0;
+	        
+	        while(l1!=null){
+	            sum1= sum1*10 + l1.val;  //342
+	            l1 = l1.next;
+	        }
+	        
+	        while(l2!=null){
+	            sum2= sum2*10 + l2.val;   //456
+	            l2 = l2.next;
+	        }
+	        
+	        int final_sum = sum1+sum2; //807
+	        
+	        ListNode head = new ListNode(0); 
+	        ListNode temp = head;
+            int count =0;
+	        
+	        while(final_sum >0){
+	            int md = final_sum%10;
+	            ListNode newnode = new ListNode(md); 
+	            temp.next = newnode;
+	            final_sum =final_sum/10;
+	            temp =temp.next;
+                count++;
+	        }
+	         if(final_sum == 0 && count==0){
+	        	ListNode newnode = new ListNode(0); 
+	            temp.next = newnode;
+	            temp =temp.next;
+                // return (head.next.next);
+	        }
+	        return (head.next);
+	    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ACCEPTED Solution
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+        
+	    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	  
+            ListNode temp = new ListNode(0);
+            ListNode head = temp;
+            int carry =0;
+            int l1_Val =0;
+            int l2_Val = 0;
+            while(l1!= null || l2!= null){
+                  if(l1!= null){
+                    l1_Val=l1.val;
+                }else{l1_Val=0;}
+           if(l2!= null){
+                    l2_Val=l2.val;
+                }else{l2_Val=0;}
+                
+                
+                int sum = l1_Val + l2_Val +carry;
+                carry = sum/10;
+                int current =  sum%10;
+                
+                ListNode newNode = new ListNode(current);
+                head.next = newNode;
+                
+                
+                
+                if(l1!= null){
+                    l1=l1.next;
+                }
+            if(l2!= null){
+                    l2=l2.next;
+                }
+                head = head.next;
+            }
+            
+            if(carry>0){
+                ListNode newNode1 = new ListNode(carry);
+                head.next = newNode1;
+                head = head.next;
+            }
+            
+            return temp.next;
+        }       
+}
